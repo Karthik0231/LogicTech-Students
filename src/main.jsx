@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import { createRoot } from 'react-dom/client';
+import { Analytics } from '@vercel/analytics/react';
 import {
   ArrowRight, CheckCircle2, ChevronDown, Code2, Copy, Gift, GraduationCap,
   Menu, MessageCircle, Phone, Rocket, ShieldCheck, Sparkles, Users, X, Zap,
@@ -237,4 +238,4 @@ function CompactForm({ onSent }) {
   </form>;
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(<><App /><Analytics /></>);
