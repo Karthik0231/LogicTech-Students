@@ -61,3 +61,6 @@
 	.fixed-enquiry{left:50%;right:auto;bottom:14px;transform:translateX(-50%);width:max-content}
 	.fixed-mobile-trigger{min-width:210px;padding:16px 24px;font-size:15px}
 }
+
+.footer-main a{display:flex;align-items:center;gap:6px}
+.footer-main a svg{flex:0 0 auto}
