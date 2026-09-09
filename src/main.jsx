@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client';
 import { Analytics } from '@vercel/analytics/react';
 import {
   ArrowRight, CheckCircle2, ChevronDown, Code2, Copy, Gift, GraduationCap,
-  Instagram, Menu, MessageCircle, Phone, Rocket, ShieldCheck, Sparkles, Users, X, Zap,
+  Menu, MessageCircle, Phone, Rocket, ShieldCheck, Sparkles, Users, X, Zap,
   Send, IndianRupee
 } from 'lucide-react';
 import './styles.css';
@@ -208,7 +208,7 @@ function App() {
         <section className="section faq reveal" id="faq"><div className="section-head"><div><span className="kicker">FAQ</span><h2>Questions students <span>usually ask.</span></h2></div></div><div className="faq-list">{faqs.map(([q, a], i) => <div className="faq-item" key={q}><button onClick={() => setFaq(faq === i ? null : i)} aria-expanded={faq === i}><span>{q}</span><ChevronDown className={faq === i ? 'rot' : ''} /></button>{faq === i && <p>{a}</p>}</div>)}</div></section>
       </main>
 
-      <footer><div className="footer-main"><div className="brand footer-brand"><img src={logo} alt="LogicTech Solutions" /><span><b>LOGICTECH</b><small>STUDENT SOLUTIONS</small></span><p>Professional, affordable student project solutions from LogicTech Solutions.</p></div><div><b>Explore</b><a onClick={() => go('solutions')}>Solutions</a><a onClick={() => go('stacks')}>Tech Stacks</a><a onClick={() => go('projects')}>Project Ideas</a><a onClick={() => go('referral')}>Refer & Earn</a></div><div><b>Contact</b><a href="mailto:logictech968@gmail.com">logictech968@gmail.com</a><a onClick={() => setPopup(true)}>Project Enquiry</a><a href="https://www.instagram.com/logic_techsolutions?stkn=MWg0M2w2YXllbXV2MQ==" target="_blank" rel="noreferrer" aria-label="Follow LogicTech Solutions on Instagram"><Instagram size={16} /> Instagram</a><a onClick={() => go('faq')}>FAQs</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} LogicTech Solutions. All rights reserved.</span><span>Build · Understand · Present</span></div></footer>
+      <footer><div className="footer-main"><div className="brand footer-brand"><img src={logo} alt="LogicTech Solutions" /><span><b>LOGICTECH</b><small>STUDENT SOLUTIONS</small></span><p>Professional, affordable student project solutions from LogicTech Solutions.</p></div><div><b>Explore</b><a onClick={() => go('solutions')}>Solutions</a><a onClick={() => go('stacks')}>Tech Stacks</a><a onClick={() => go('projects')}>Project Ideas</a><a onClick={() => go('referral')}>Refer & Earn</a></div><div><b>Contact</b><a href="mailto:logictech968@gmail.com">logictech968@gmail.com</a><a onClick={() => setPopup(true)}>Project Enquiry</a><a href="https://www.instagram.com/logic_techsolutions?stkn=MWg0M2w2YXllbXV2MQ==" target="_blank" rel="noreferrer" aria-label="Follow LogicTech Solutions on Instagram">Instagram</a><a onClick={() => go('faq')}>FAQs</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} LogicTech Solutions. All rights reserved.</span><span>Build · Understand · Present</span></div></footer>
 
       <div className="fixed-enquiry"><div className="fixed-copy"><span className="fixed-dot" /><div><b>Have a project idea?</b><small>Tell us the basics. We'll call you.</small></div></div><button className="fixed-mobile-trigger" onClick={() => setPopup(true)}><MessageCircle size={18} /> Start an Enquiry</button><div className="fixed-form-wrap"><CompactForm onSent={() => setSent(true)} /></div></div>
 
