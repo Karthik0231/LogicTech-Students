@@ -102,6 +102,15 @@ function App() {
   }, [popup]);
 
   useEffect(() => {
+    if (!popup) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setPopup(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [popup]);
+
+  useEffect(() => {
     const reveal = new IntersectionObserver((entries) => entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('is-visible');
     }), { threshold: 0.12 });
@@ -124,16 +133,16 @@ function App() {
             <img src={logo} alt="LogicTech Solutions" />
             <span><b>LOGICTECH</b><small>STUDENT SOLUTIONS</small></span>
           </a>
-          <nav className={menu ? 'open' : ''}>
-            <a onClick={() => go('solutions')}>Solutions</a>
-            <a onClick={() => go('stacks')}>Tech Stacks</a>
-            <a onClick={() => go('projects')}>Projects</a>
-            <a onClick={() => go('process')}>How It Works</a>
-            <a onClick={() => go('referral')}>Refer & Earn</a>
-            <a onClick={() => go('faq')}>FAQ</a>
+          <nav className={menu ? 'open' : ''} aria-label="Primary navigation">
+            <a href="#solutions" onClick={() => go('solutions')}>Solutions</a>
+            <a href="#stacks" onClick={() => go('stacks')}>Tech Stacks</a>
+            <a href="#projects" onClick={() => go('projects')}>Projects</a>
+            <a href="#process" onClick={() => go('process')}>How It Works</a>
+            <a href="#referral" onClick={() => go('referral')}>Refer & Earn</a>
+            <a href="#faq" onClick={() => go('faq')}>FAQ</a>
           </nav>
           <button className="nav-cta" onClick={() => setPopup(true)}>Start Enquiry <ArrowRight size={16} /></button>
-          <button className="menu" onClick={() => setMenu(!menu)} aria-label="Open menu">{menu ? <X /> : <Menu />}</button>
+          <button className="menu" onClick={() => setMenu(!menu)} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu}>{menu ? <X /> : <Menu />}</button>
         </div>
       </header>
 
@@ -195,16 +204,16 @@ function App() {
 
         <section className="cta reveal"><div><span className="kicker">NO COMPLICATED BRIEF</span><h2>Have a topic?<br/><span>Let's talk.</span></h2><p>Even if you only know the subject or topic, that's enough to start. We'll contact you and discuss the practical options.</p></div><button className="primary light" onClick={() => setPopup(true)}>Send Enquiry <ArrowRight /></button></section>
 
-        <section className="section faq reveal" id="faq"><div className="section-head"><div><span className="kicker">FAQ</span><h2>Questions students <span>usually ask.</span></h2></div></div><div className="faq-list">{faqs.map(([q, a], i) => <div className="faq-item" key={q}><button onClick={() => setFaq(faq === i ? null : i)}><span>{q}</span><ChevronDown className={faq === i ? 'rot' : ''} /></button>{faq === i && <p>{a}</p>}</div>)}</div></section>
+        <section className="section faq reveal" id="faq"><div className="section-head"><div><span className="kicker">FAQ</span><h2>Questions students <span>usually ask.</span></h2></div></div><div className="faq-list">{faqs.map(([q, a], i) => <div className="faq-item" key={q}><button onClick={() => setFaq(faq === i ? null : i)} aria-expanded={faq === i}><span>{q}</span><ChevronDown className={faq === i ? 'rot' : ''} /></button>{faq === i && <p>{a}</p>}</div>)}</div></section>
       </main>
 
       <footer><div className="footer-main"><div className="brand footer-brand"><img src={logo} alt="LogicTech Solutions" /><span><b>LOGICTECH</b><small>STUDENT SOLUTIONS</small></span><p>Professional, affordable student project solutions from LogicTech Solutions.</p></div><div><b>Explore</b><a onClick={() => go('solutions')}>Solutions</a><a onClick={() => go('stacks')}>Tech Stacks</a><a onClick={() => go('projects')}>Project Ideas</a><a onClick={() => go('referral')}>Refer & Earn</a></div><div><b>Contact</b><a href="mailto:logictech968@gmail.com">logictech968@gmail.com</a><a onClick={() => setPopup(true)}>Project Enquiry</a><a onClick={() => go('faq')}>FAQs</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} LogicTech Solutions. All rights reserved.</span><span>Build · Understand · Present</span></div></footer>
 
-      <div className="fixed-enquiry"><div className="fixed-copy"><span className="fixed-dot" /><div><b>Have a project idea?</b><small>Tell us the basics. We'll call you.</small></div></div><CompactForm onSent={() => setSent(true)} /></div>
+      <div className="fixed-enquiry"><div className="fixed-copy"><span className="fixed-dot" /><div><b>Have a project idea?</b><small>Tell us the basics. We'll call you.</small></div></div><button className="fixed-mobile-trigger" onClick={() => setPopup(true)}><MessageCircle size={18} /> Start an Enquiry</button><div className="fixed-form-wrap"><CompactForm onSent={() => setSent(true)} /></div></div>
 
       {sent && <div className="toast"><CheckCircle2 /> Enquiry sent. LogicTech will contact you.</div>}
 
-      {popup && <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && closePopup()}><div className="popup"><button className="close" onClick={closePopup}><X /></button><div className="popup-art"><div className="popup-art-ring" /><img src={logo} alt="LogicTech" /></div><div className="popup-content"><span className="kicker">QUICK PROJECT ENQUIRY</span><h2>Tell us the basics.<br/><span>We'll contact you.</span></h2><p>No long form. Just your name, phone and a little context if you have it.</p><CompactForm onSent={() => { setSent(true); closePopup(); }} /></div></div></div>}
+      {popup && <div className="modal-backdrop" onMouseDown={e => e.target === e.currentTarget && closePopup()}><div className="popup" role="dialog" aria-modal="true" aria-labelledby="enquiry-title"><button className="close" onClick={closePopup} aria-label="Close enquiry form"><X /></button><div className="popup-art"><div className="popup-art-ring" /><img src={logo} alt="LogicTech" /></div><div className="popup-content"><span className="kicker">QUICK PROJECT ENQUIRY</span><h2 id="enquiry-title">Tell us the basics.<br/><span>We'll contact you.</span></h2><p>No long form. Just your name, phone and a little context if you have it.</p><CompactForm onSent={() => { setSent(true); closePopup(); }} /></div></div></div>}
     </>
   );
 }
@@ -224,7 +233,7 @@ function CompactForm({ onSent }) {
       <label className="full">Referred by <span>(optional)</span><input name="referred_by" placeholder="Friend's name" /></label>
     </div>
     <button className="primary submit" type="submit">Send Enquiry <ArrowRight size={16} /></button>
-    <small className="form-note"><ShieldCheck size={13} /> Sent to logictech968@gmail.com</small>
+    {/* <small className="form-note"><ShieldCheck size={13} /> Sent to logictech968@gmail.com</small> */}
   </form>;
 }
 
