@@ -27,4 +27,4 @@ npm run build
 ```
 
 ### Form
-The forms use FormSubmit and send enquiries to `logictech968@gmail.com`. Update `_next` in `src/main.jsx` if the final success page URL differs from `https://logictechsolutions.in/student-project-success.html`.
+The forms use FormSubmit and send enquiries to `logictech968@gmail.com`. Update `_next` in `src/main.jsx` if the final success page URL differs from `https://logictech-students.vercel.app/student-project-success.html`.

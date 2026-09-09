@@ -223,7 +223,7 @@ function CompactForm({ onSent }) {
     <input type="hidden" name="_subject" value="New LogicTech Student Enquiry" />
     <input type="hidden" name="_captcha" value="false" />
     <input type="hidden" name="_template" value="table" />
-    <input type="hidden" name="_next" value="https://logictechsolutions.in/student-project-success.html" />
+    <input type="hidden" name="_next" value="https://logictech-students.vercel.app/student-project-success.html" />
     <input className="hp" type="text" name="_honey" tabIndex="-1" autoComplete="off" />
     <div className="compact-grid">
       <label>Name *<input required name="student_name" placeholder="Your name" /></label>

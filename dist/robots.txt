@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /student-project-success.html
+
+Sitemap: https://logictech-students.vercel.app/sitemap.xml
